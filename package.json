@@ -26,6 +26,7 @@
     "node": ">=6"
   },
   "files": [
+    "bin",
     "src/*.js",
     "!src/*-spec.js"
   ],
@@ -40,6 +41,9 @@
   ],
   "license": "MIT",
   "main": "src/",
+  "bin": {
+    "csrf-proxy": "bin/csrf-proxy.js"
+  },
   "noScopeName": "csrf-proxy",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
@@ -54,13 +58,14 @@
     "format": "standard-format -w src/*.js",
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
-    "lint": "standard --verbose src/*.js",
+    "lint": "standard --verbose bin/*.js src/*.js",
     "pretest": "npm run format && npm run lint",
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "node bin/csrf-proxy.js"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.8.3",
@@ -73,5 +78,13 @@
     "standard": "7.1.2",
     "standard-format": "2.2.2",
     "semantic-release": "^4.3.5"
+  },
+  "dependencies": {
+    "check-more-types": "2.22.0",
+    "csrf-login": "1.13.3",
+    "debug": "2.2.0",
+    "express": "4.14.0",
+    "lazy-ass": "1.4.0",
+    "request": "2.74.0"
   }
 }
